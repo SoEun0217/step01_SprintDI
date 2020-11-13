@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+<!-- 외부 properties파일의 위치를 설정하는 클래스 선언 -->
+<!-- <bean class="org.springframework.beans.factory.config.PlaceholderConfigurerSupport">
+	<property name="location">setLocation()호출...
+	<value>classpath:sample06/customerInfo.properties</value>
+	</property>
+</bean> -->
+
+<!-- <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
+	<property name="locations">
+		<array>
+		<value>classpath:sample06/customerInfo.properties</value>
+		<value>classpath:sample06/customerInfo2.properties</value>
+		</array>
+	</property>
+</bean> -->
+
+
+<context:property-placeholder location="classpath:sample06/customerInfo.properties,classpath:sample06/customerInfo2.properties"/>
+
+<!-- customer객체를 생성 -->
+<bean class="sample06.Customer" id="cu1"/>
+<bean class="sample06.Customer" id="cu2">
+	<constructor-arg value="jang"/>
+</bean>
+
+<bean class="sample06.Customer" id="cu3">
+	<property name="id" value="${user.id}"/>
+	<property name="addr" value="${user.addr}"/>
+	<property name="age" value="${user.age}"/>
+</bean>
+
+<bean class="sample06.Customer" id="cu4">
+	<constructor-arg value="queen"/>
+	<property name="addr" value="대구"/>
+	<property name="age" value="20"/>
+</bean>
+<!-- 외부 properties파일의 key참조하기 -->
+<bean class="sample06.Customer" id="cu5">
+	<property name="id" value="${id}"/>
+	<property name="age" value="${age}"/>
+	<property name="addr" value="${addr}"/>
+</bean>
+
+<bean class="sample06.Customer" id="cu6" p:id="aa" p:addr="강동구" p:age="38"/>
+</beans>
+

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!-- membervo가 하나일때 -->
+	<bean class="sample07.MemberVO" id="memberVO">
+		<constructor-arg value="소은"/>
+		<constructor-arg value="24"/>
+		<constructor-arg value="서울"/>
+	</bean>
+	
+ 	<bean class="sample07.MemberVO" id="member">
+		<property name="name" value="살구"/>
+		<property name="age" value="2"/>
+		<property name="addr" value="소은집"/>
+	</bean>
+	
+<!-- 
+	autowire속성
+	1)byType : setXxx() 호출된다. type이 같은 객체를 찾아서 자동 주입
+				생성된 동일한 객체가 여러개이면 사용할 수 없다.
+				이럴때는 byName으로 사용해야한다.
+	
+	2)byName : setXxx() 호출된다. xml의 id와 property(class안의 속성명)의 이름이 동일한 객체를 찾아서
+				주입된다.
+	
+	3)constructor : 생성자를 호출한다.
+					byType으로 주입하고 안되면 byName으로 주입
+					여기서, byName은 xml의 id와 자바의 생성자의 매개변수이름과 동일해야 가능하다.
+	
+	
+	 -->
+
+	<bean class="sample07.MemberController" id="controller" autowire="constructor"/>
+
+
+</beans>
